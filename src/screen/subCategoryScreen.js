@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, FlatList, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import axios from 'axios';
 
-const CategoryScreen = (props) => {
-
+const SubCategoryScreen = (props) => {
+    const { item } = props.route.params;
     const [data, setData] = useState([])
 
     const api = () => {
         return (
-            axios.get(`http://lyricalvideostatus.stickerapp.in/Get_Main_Category`)
+            axios.get(`http://lyricalvideostatus.stickerapp.in/Get_Category/${item.id}`)
                 .then((response) => {
                     setData(response.data.data || [])
+                    // console.log(response.data)
                 })
                 .catch((error) => {
                     console.log(error);
@@ -25,9 +26,10 @@ const CategoryScreen = (props) => {
     const renderItem = ({ item }) => {
         return (
             <View style={styles.container}>
-                <TouchableOpacity onPress={() => props.navigation.navigate('SubCategoryScreen', { item: item })}>
+                <TouchableOpacity >
                     <View style={styles.itemWrapper}>
-                        <Text style={styles.textWrapper}>{item.name}</Text>
+                        <Image source={{ uri: 'http://lyricalvideostatus.stickerapp.in/' + item.icon }} style={{ height: 60, width: 60 }} />
+                        <Text style={[styles.textWrapper, { color: item.color_code }]}>{item.name}</Text>
                     </View>
                 </TouchableOpacity>
             </View>
@@ -39,7 +41,7 @@ const CategoryScreen = (props) => {
             data={data}
             keyExtractor={item => item.id}
             renderItem={renderItem}
-            numColumns={2}
+            numColumns={3}
         />
     );
 }
@@ -52,20 +54,23 @@ const styles = StyleSheet.create({
     itemWrapper: {
         backgroundColor: 'white',
         height: 100,
-        width: 160,
         marginVertical: 5,
         justifyContent: 'center',
         borderRadius: 10,
         shadowColor: '#000',
-        // shadowOpacity: 0.5,
         elevation: 8,
-        shadowRadius: 15
-
+        shadowRadius: 15,
+        justifyContent: 'center',
+        alignItems:'center',
+        paddingTop:5,
     },
     textWrapper: {
         textAlign: 'center',
-        fontSize: 17,
-        color: '#000'
+        fontSize: 16,
+        padding:5
     }
 })
-export default CategoryScreen;
+
+
+
+export default SubCategoryScreen;

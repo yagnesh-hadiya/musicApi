@@ -2,6 +2,7 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import CategoryScreen from './src/screen/categoryScreen';
+import SubCategoryScreen from './src/screen/subCategoryScreen';
 
 const Stack = createStackNavigator();
 
@@ -10,6 +11,7 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Category" component={CategoryScreen} options={{ headerTitleAlign: 'center' }} />
+        <Stack.Screen name="SubCategoryScreen" component={SubCategoryScreen} options={{ headerTitleAlign: 'center' }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
