@@ -25,7 +25,7 @@ const CategoryScreen = (props) => {
     const renderItem = ({ item }) => {
         return (
             <View style={styles.container}>
-                <TouchableOpacity onPress={() => props.navigation.navigate('SubCategoryScreen', { item: item })}>
+                <TouchableOpacity onPress={() => props.navigation.navigate('SubCategoryScreen', { catId: item })}>
                     <View style={styles.itemWrapper}>
                         <Text style={styles.textWrapper}>{item.name}</Text>
                     </View>
@@ -57,7 +57,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         borderRadius: 10,
         shadowColor: '#000',
-        // shadowOpacity: 0.5,
         elevation: 8,
         shadowRadius: 15
 
